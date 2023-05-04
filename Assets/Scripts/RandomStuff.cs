@@ -18,11 +18,12 @@ public class RandomStuff : MonoBehaviour
     int index = 0;
 
     public static int position=0;
-    
+    private bool waitOneSecond = false;
 
-    
 
-    
+
+
+
 
     public void BtnAction()
     {
@@ -59,13 +60,29 @@ public class RandomStuff : MonoBehaviour
         {
             index = position;
             isMoving = false;
+
+            if (waitOneSecond)
+            {
+                StartCoroutine(WaitOneSecond());
+                waitOneSecond = false;
+            }
         }
 
-        
 
+        //if (position==28) {position = 10;}
+
+        if (position == 28)
+        {
+            waitOneSecond = true;
+        }
 
         //Debug.Log(isMoving);
     }
+        private IEnumerator WaitOneSecond()
+        {
+            yield return new WaitForSeconds(1f);
+            position = 10;
+        }
 
 
 }
